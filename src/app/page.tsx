@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import editIcon from "../../public/edit.png";
 import deleteIcon from "../../public/delete.png";
 import addicon from "../../public/add.png";
+import Link from "next/link";
+import Nav from "./component/nav";
 
 type Todo = {
   id: number;
@@ -60,7 +62,7 @@ export default function Home() {
     setInput("");
   };
 
-  const handleEdit = (id:any) => {
+  const handleEdit = (id: any) => {
     const todo = todos.find((t) => t.id === id);
     if (todo) {
       setInput(todo.text);
@@ -68,71 +70,74 @@ export default function Home() {
     }
   };
 
-  const handleDelete = (id:any) => {
+  const handleDelete = (id: any) => {
     setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
-    <Box p={4} maxWidth={600} mx="auto">
-      <Typography variant="h3" color="#000" mb={2}>
-        ToDo List
-      </Typography>
+    <Box>
+      <Nav />
+      <Box p={4} maxWidth={600} mx="auto">
+        <Typography variant="h3" color="#000" mb={2}>
+          ToDo List
+        </Typography>
 
-      <TextField
-        fullWidth
-        placeholder="Search tasks..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        sx={{ mb: 3 }}
-      />
-
-      <Box display="flex" gap={2} mb={3}>
         <TextField
           fullWidth
-          placeholder="Add a new task"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          placeholder="Search tasks..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{ mb: 3 }}
         />
-        <Button onClick={handleAddOrUpdate} variant="contained">
-          {editId ? "Update" : "Add"}
-        </Button>
-      </Box>
 
-      {filteredTodos.map((todo, index) => (
-        <Box
-          key={todo.id}
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          border="1px solid #000"
-          borderRadius={1}
-          p={2}
-          mb={2}
-        >
-          <Box display="flex" gap={2} alignItems="center" bgcolor={'#d8d8d8'}>
-            <Typography color="green" variant="h6">
-              {index + 1}.
-            </Typography>
-            <Typography color="green" variant="h6">
-              {todo.text}
-            </Typography>
-          </Box>
-          <Box display="flex" gap={1}>
-            <IconButton onClick={() => handleEdit(todo.id)}>
-              <Image src={editIcon} alt="edit" width={24} height={24} />
-            </IconButton>
-            <IconButton onClick={() => handleDelete(todo.id)}>
-              <Image src={deleteIcon} alt="delete" width={24} height={24} />
-            </IconButton>
-          </Box>
+        <Box display="flex" gap={2} mb={3}>
+          <TextField
+            fullWidth
+            placeholder="Add a new task"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <Button onClick={handleAddOrUpdate} variant="contained">
+            {editId ? "Update" : "Add"}
+          </Button>
         </Box>
-      ))}
 
-      {filteredTodos.length === 0 && (
-        <Typography color="gray" textAlign="center" mt={2}>
-          No ToDo found.
-        </Typography>
-      )}
+        {filteredTodos.map((todo, index) => (
+          <Box
+            key={todo.id}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            border="1px solid #000"
+            borderRadius={1}
+            p={2}
+            mb={2}
+          >
+            <Box display="flex" gap={2} alignItems="center" bgcolor={"#d8d8d8"}>
+              <Typography color="green" variant="h6">
+                {index + 1}.
+              </Typography>
+              <Typography color="green" variant="h6">
+                {todo.text}
+              </Typography>
+            </Box>
+            <Box display="flex" gap={1}>
+              <IconButton onClick={() => handleEdit(todo.id)}>
+                <Image src={editIcon} alt="edit" width={24} height={24} />
+              </IconButton>
+              <IconButton onClick={() => handleDelete(todo.id)}>
+                <Image src={deleteIcon} alt="delete" width={24} height={24} />
+              </IconButton>
+            </Box>
+          </Box>
+        ))}
+
+        {filteredTodos.length === 0 && (
+          <Typography color="gray" textAlign="center" mt={2}>
+            No ToDo found.
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 }
