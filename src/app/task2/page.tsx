@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Nav from "../component/nav";
 
@@ -43,22 +42,18 @@ const UserList = () => {
     <Box>
       <Nav />
 
-      <Box p={10}>
-        <Typography color="#000" variant="h6">
-          User List
+      <Box p={4} maxWidth={600} mx="auto">
+        <Typography variant="h4" color="#000" mb={2}>
+          Debugging Code User list
         </Typography>
-        <input
-          type="text"
-          placeholder="Search users..."
+
+        <TextField
+          label="Search Users"
+          variant="outlined"
+          fullWidth
           value={filter}
           onChange={handleSearch}
-          style={{
-            margin: "16px 0",
-            padding: "8px",
-            width: "100%",
-            color: "#000",
-            border: "1px solid",
-          }}
+          sx={{ mb: 2 }}
         />
         <Box>
           {filteredUsers.length === 0 ? (

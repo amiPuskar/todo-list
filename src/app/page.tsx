@@ -78,7 +78,7 @@ export default function Home() {
     <Box>
       <Nav />
       <Box p={4} maxWidth={600} mx="auto">
-        <Typography variant="h3" color="#000" mb={2}>
+        <Typography variant="h4" color="#000" mb={2}>
           ToDo List
         </Typography>
 
@@ -113,7 +113,7 @@ export default function Home() {
             p={2}
             mb={2}
           >
-            <Box display="flex" gap={2} alignItems="center" bgcolor={"#d8d8d8"}>
+            <Box display="flex" gap={2} alignItems="center" flex={1}>
               <Typography color="green" variant="h6">
                 {index + 1}.
               </Typography>
